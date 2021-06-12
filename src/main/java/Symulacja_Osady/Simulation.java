@@ -23,7 +23,7 @@ public class Simulation {
 	public static Boolean start1;
 	public static Boolean start3;
 	public static Boolean kontynuuj=false;
-	private static Map<Integer,Frakcja> mapfrakcji;
+	private static Map<Integer,InterfaceFrakcja> mapfrakcji;
 	/**
 	 * @param args
 	 * @throws InterruptedException 
@@ -37,23 +37,24 @@ public class Simulation {
 		while(start1==false) {
 			TimeUnit.SECONDS.sleep(1);
 		}
-		for (int i=0;i<frakcje;i++) {
-			//System.out.println(i);
-			mapfrakcji.put(i, new Frakcja(i));
-			//Frakcja trololo = Simulation.getfrakcje(0);
-			//trololo.putvillages(randomNum1,randomNum2);
-			//ArrayList<Integer> ta= trololo.gettvillages(0);
-			//System.out.println("Jestem tutaj ");
+		/*for (int i=0;i<frakcje;i++) {
+			InterfaceFrakcja interfacegrakcja = new Frakcja(i);
+			mapfrakcji.put(i, interfacegrakcja);
 		}
+		InterfaceFrakcja interfacegrakcja0 = new Frakcja(0);
+		mapfrakcji.put(0, interfacegrakcja0);
+		InterfaceFrakcja interfacegrakcja1 = new FrakcjaOffensive(1);
+		mapfrakcji.put(1, interfacegrakcja1);
+		InterfaceFrakcja interfacegrakcja2 = new Frakcja(2);
+		mapfrakcji.put(2, interfacegrakcja2);
+		InterfaceFrakcja interfacegrakcja3 = new FrakcjaBandyta(3);
+		mapfrakcji.put(3, interfacegrakcja3);*/
 		while(start==false) {
 			TimeUnit.SECONDS.sleep(1);
 		}
-
-		System.out.println("japierdole kurwa ");
 		while(start3==false)
 		{
 		TimeUnit.SECONDS.sleep(1);
-		//System.out.println("CZEKAÑSKO");
 		}
 		for (int i=0;i<inkrementacja;i++) {
 			System.out.println("TURA: "+i+"!!");
@@ -62,7 +63,6 @@ public class Simulation {
 				while(kontynuuj==false) {
 				TimeUnit.SECONDS.sleep(1);	
 				}
-				//getcords(z);
 				turax(z);
 				TimeUnit.SECONDS.sleep(1);
 				if(GUI2.isfull(rozmiar)==true) {
@@ -80,47 +80,72 @@ public class Simulation {
 			tofile(rozmiar,frakcje);
 }
 	//obiera dany obiekt frakcja
-	public static Frakcja getfrakcje(int i) {
+	public static InterfaceFrakcja getfrakcje(int i) {
 		return mapfrakcji.get(i);
 	}
 //wstawia dany obiekt frakcja
-public static void putfrakcje(int i, Frakcja trakcja) {
+public static void putfrakcje(int i, InterfaceFrakcja trakcja) {
 	mapfrakcji.put(i, trakcja);
 }
 public static void getcords(int m) {
-	Frakcja trololo = getfrakcje(m);
-	ArrayList<Integer> xyz=trololo.gettvillages(0);
+	ArrayList<Integer> xyz=getfrakcje(m).gettvillages(0);
 	System.out.println("Powtorka:Wioska nr "+m+" JEST TU:" + xyz.get(0) + " " + xyz.get(1));
 }
 public static void turax(int m) {
-	Frakcja trololo = getfrakcje(m);
-	trololo.tura();
-	mapfrakcji.put(m, trololo);
+	getfrakcje(m).tura();
 }
 public static void tofile(int ile, int ilef) {
 	   try {
-		      FileWriter myWriter = new FileWriter("symulacja.txt");
+		      FileWriter simscore = new FileWriter("symulacja.txt");
 		      for(int i=0;i<ile;i++) {
-		    	  myWriter.write("|\t");
+		    	  simscore.write("|\t");
 		    	 for(int j=0;j<ile;j++) {
-		    	myWriter.write(GUI2.getvaluetab(i, j)+"\t |\t"); 
+		    	simscore.write(GUI2.getvaluetab(i, j)+"\t |\t"); 
 		    	 }
-		    	 myWriter.write("\n|");
+		    	 simscore.write("\n|");
 		    	 for(int k=0;k<ile;k++) {
-		    		 myWriter.write("\t----\t |");  
+		    		 simscore.write("\t----\t |");  
 		    	 }
-		    	 myWriter.write("\n");
+		    	 simscore.write("\n");
 		      }
 		      for(int l=0;l<ilef;l++) {
-		    	  Frakcja trololo = getfrakcje(l);
+		    	  InterfaceFrakcja trololo = getfrakcje(l);
 		    	  int wynik = trololo.ileroads()+trololo.ilevillages();
-		    	  myWriter.write("Frakcja "+(l+1)+": "+wynik+" iloœæ obiektów\n");
+		    	  simscore.write("Frakcja "+(l+1)+": "+wynik+" iloœæ obiektów\n");
 		      }
-		      myWriter.close();
+		      simscore.close();
 		      System.out.println("Successfully wrote to the file.");
 		    } catch (IOException e) {
 		      System.out.println("An error occurred.");
 		      e.printStackTrace();
 		    }
+	}
+private static void createvillages() {
+	for (int i=0;i<frakcje;i++) {
+	InterfaceFrakcja interfacegrakcja = new Frakcja(i);
+	mapfrakcji.put(i, interfacegrakcja);
+	Map_Generator.setstart();
+}
+}
+public static void defaultvillagescreator() {
+	createvillages();
+}
+private static void createvillagesadv(int i,int a) {
+	if(a==0) {
+		InterfaceFrakcja interfacegrakcja = new Frakcja(i);
+		mapfrakcji.put(i, interfacegrakcja);
+	}
+	if(a==1) {
+		InterfaceFrakcja interfacegrakcja = new FrakcjaBandyta(i);
+		mapfrakcji.put(i, interfacegrakcja);
+	}
+	if(a==2) {
+		InterfaceFrakcja interfacegrakcja = new FrakcjaOffensive(i);
+		mapfrakcji.put(i, interfacegrakcja);
+	}
+	System.out.println("Village created!!");
+}
+public static void advvillagecreator(int x1,int x2) {
+	createvillagesadv(x1,x2);
 }
 }

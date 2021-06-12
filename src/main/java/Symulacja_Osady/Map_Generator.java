@@ -14,6 +14,7 @@ import Symulacja_Osady.Simulation;
  */
 public class Map_Generator {
 	public static int[][] tablica;
+	public static Boolean simstarted=false;
 	public Map_Generator(int size,int frnum)
 	{
 		int[][] tablica = new int[size][size];
@@ -52,7 +53,7 @@ public class Map_Generator {
 	}
 		for (int k=0;k<frnum;k++)
 		{
-			Frakcja trololo = Simulation.getfrakcje(k);
+			InterfaceFrakcja trololo = Simulation.getfrakcje(k);
 			int randomNum1 = ThreadLocalRandom.current().nextInt(0, size);
 			int randomNum2 = ThreadLocalRandom.current().nextInt(0, size);
 			//System.out.println(randomNum1 + "  " + randomNum2);
@@ -79,11 +80,13 @@ public class Map_Generator {
 					GUI2.table.setValueAt("R14", randomNum1, randomNum2);
 					}
 					//GUI2.table.setValueAt("R1", randomNum1, randomNum2);
-					try {
-						TimeUnit.SECONDS.sleep(5);
-					} catch (InterruptedException e) {
+					while(simstarted==false) {
+						try {
+							TimeUnit.SECONDS.sleep(5);
+						} catch (InterruptedException e) {
+						}
 					}
-
+					
 					trololo.putvillages(randomNum1,randomNum2);
 					ArrayList<Integer> xyz=trololo.gettvillages(0);
 					Simulation.putfrakcje(k, trololo);
@@ -153,5 +156,7 @@ public class Map_Generator {
 		}
 		Simulation.start3=true;
 	}
-
+	public static void setstart() {
+		simstarted=true;
+	}
 }

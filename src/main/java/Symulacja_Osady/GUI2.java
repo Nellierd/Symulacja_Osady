@@ -414,6 +414,9 @@ public class GUI2 implements ActionListener {
 		}
 	}
 	public static void putvaluetab(String s,int x, int y) {
+		putvaluetab1(s, x, y);
+	}
+	private static void putvaluetab1(String s,int x, int y) {
 		table.setValueAt(s, x, y);
 	}
 	public static String getvaluetab(int x, int y) {
