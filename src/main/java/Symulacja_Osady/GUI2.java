@@ -1,26 +1,22 @@
 package Symulacja_Osady;
 
 import java.awt.Color;
-import java.awt.Component;
-import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.concurrent.ThreadLocalRandom;
-
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
-import javax.xml.crypto.Data;
-import Symulacja_Osady.BoardRenderer;
-import Symulacja_Osady.GUI;
-import Symulacja_Osady.Map_Generator;
 
+/**
+ * Implementacja interface''u graficznego dla symulacji
+ * @author Nenaki
+ *
+ */
 public class GUI2 implements ActionListener{
 	private static JTable table;
-	private static JTable table1;
 	private static JTable table2;
 	private JFrame frame1;
 	private JPanel panel1;
@@ -64,49 +60,98 @@ public class GUI2 implements ActionListener{
 	private static JLabel wood41;
 	private static JLabel clay41;
 	private DefaultTableModel model;
-	private DefaultTableModel model1;
 	private DefaultTableModel model2;
 	private static int rozmiarplanszy;
 	public Map_Generator map1;
+	private int xbounds;
 	public GUI2(int size) {
-		int xbounds=50*size;
+		xbounds=50*size;
 		rozmiarplanszy=size;
+		guiinitialization();
+		scoreinitialization();
+	}
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		Object source = e.getSource();
+		if(source == button1)
+		{ 	
+			Simulation.setstart();
+			map1 = new Map_Generator( Simulation.jakirozmiar(),Simulation.ilefrakcji());	
+			button1.setVisible(false);
+			button2.setVisible(true);
+		}
+		if(source == button2) {
+			Simulation.setcontinuetrue();
+			button2.setVisible(false);
+			button3.setVisible(true);
+			button2.setText("Kontynuuj");
+		}
+		if(source == button3) {
+			Simulation.setcontinuefalse();
+			button3.setVisible(false);
+			button2.setVisible(true);
+		}
+	}
+	public static int whatresources(int x,int y) {
+		return whatresources1(x,y);
+	}
+	public static Boolean isroad(int x,int y) {
+		return isroad1(x,y);
+	}
+	public static Boolean isvillage(int x,int y) {
+		return isvillage1(x,y);
+	}
+	public static Boolean canibuild(int x,int y) {
+		return canibuild1(x,y);
+	}
+	public static void putvaluetab(String s,int x, int y) {
+		putvaluetab1(s, x, y);
+	}
+	public static void putvaluetab2(String s,int x, int y) {
+		putvaluetab21(s, x, y);
+	}
+	public static String getvaluetab2(int x, int y) {
+		return getvaluetab21(x,y);
+	}
+	public static void labeling(int n,int s,int i, int w, int c) {
+		labeling1(n,s,i,w,c);
+	}
+	public static Boolean isfull(int mapsize) {
+		return isfull1(mapsize);
+	}
+	public static String getvaluetab(int x, int y) {
+		Object abc =table.getValueAt(x, y);
+		return abc.toString();
+	}
+	public static void labeling2(int n,int s,int i, int w, int c) {
+		labeling21(n,s,i,w,c);
+	}
+	/**
+	 * Inicjalizacja komponentów interface'u
+	 */
+	private void guiinitialization() {
 		frame1 = new JFrame();
 		panel1 = new JPanel();
-		frame1.setSize(3*xbounds+105,xbounds+250);
+		frame1.setSize(xbounds+75,xbounds+250);
 		frame1.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame1.add(panel1);
 		panel1.setLayout(null);
 		frame1.setVisible(true);
-
 		model = new DefaultTableModel(); 
 		table = new JTable(model);
-		model1 = new DefaultTableModel();  
-		table1 = new JTable(model1); 
 		model2 = new DefaultTableModel();  
 		table2 = new JTable(model2);
-		for (int i=0;i<size;i++)
+		for (int i=0;i<rozmiarplanszy;i++)
 		{
 		model.addColumn("");
 		model.addRow(new Object[] {});
-		model1.addColumn("");
-		model1.addRow(new Object[] {});
 		model2.addColumn("");
 		model2.addRow(new Object[] {});
 		}
-
         table.setRowHeight(50);
 		table.setBounds(20, 50, xbounds, xbounds);
 		table.setEnabled(false);
-        table1.setRowHeight(50);
-		table1.setBounds(xbounds+40, 50, xbounds, xbounds);
-		table1.setEnabled(false);
-	    table2.setRowHeight(50);
-	    table2.setBounds(2*xbounds+60, 50, xbounds, xbounds);
-		table2.setEnabled(false);
         panel1.add(table);
-        panel1.add(table1);
-        panel1.add(table2);
 		button1 = new JButton("Generuj");
 		button1.addActionListener(this);
 		button1.setBounds(10,xbounds+60,120,25);
@@ -122,6 +167,13 @@ public class GUI2 implements ActionListener{
 		button2.setVisible(false);
 		button3.setVisible(false);
 		table.setDefaultRenderer(Object.class,new BoardRenderer());
+	}
+	/**
+	 * Inicjalizacja wyników
+	 */
+	private void scoreinitialization() {
+		Boolean x1=false;
+		Boolean x2=false;
 		frakcja1 = new JLabel("Frakcja I");
 		frakcja1.setOpaque(true);
 		frakcja1.setBackground(Color.RED);
@@ -151,6 +203,7 @@ public class GUI2 implements ActionListener{
 		clay11 = new JLabel("(+0)");
 		clay11.setBounds(70, xbounds+170, 80, 25);
 		panel1.add(clay11);
+		if(Simulation.ilefrakcji()>1) {
 		frakcja2 = new JLabel("Frakcja II");
 		frakcja2.setOpaque(true);
 		frakcja2.setBackground(Color.BLUE);
@@ -180,9 +233,7 @@ public class GUI2 implements ActionListener{
 		clay21 = new JLabel("(+0)");
 		clay21.setBounds(170, xbounds+170, 80, 25);
 		panel1.add(clay21);
-		Boolean x1=false;
-		Boolean x2=false;
-		System.out.println(Simulation.ilefrakcji());
+		}
 		if (Simulation.ilefrakcji()==4) {
 			x1=true;
 			x2=true;
@@ -252,15 +303,15 @@ public class GUI2 implements ActionListener{
 			clay41.setBounds(370, xbounds+170, 80, 25);
 			panel1.add(clay41);
 		}
-		frame1.setResizable(false);
+		
 		frame1.setVisible(true);
-		
-		
-	
 	}
-	public static int whatresources(int x,int y) {
-		return whatresources1(x,y);
-	}
+	/**
+	 * Funkcja sprawdzaj¹ca jaki surowiec znajduje siê na danym polu
+	 * @param x - rz¹d
+	 * @param y - kolumna
+	 * @return rodzaj surowca
+	 */
 	private static int whatresources1(int x,int y) {
 		if (x<0||x==Simulation.jakirozmiar()||y<0||y==Simulation.jakirozmiar()) {
 			return 0;
@@ -281,9 +332,6 @@ public class GUI2 implements ActionListener{
 			return 0;
 		}
 	}
-	public static Boolean isroad(int x,int y) {
-		return isroad1(x,y);
-	}
 	/**
 	 * Funkcja sprawdzazj¹ca czy na danym polu jest wybudowana droga
 	 * @param x kolumna
@@ -292,7 +340,6 @@ public class GUI2 implements ActionListener{
 	 * <strong>false</strong> - jeœli na danym polu nie ma drogi
 	 */
 	private static Boolean isroad1(int x,int y) {
-		
 		if (x<0||x==Simulation.jakirozmiar()||y<0||y==Simulation.jakirozmiar()) {
 			return null;
 		}
@@ -355,28 +402,22 @@ public class GUI2 implements ActionListener{
 	 * @return <strong>true</strong> - jeœli w poli¿u danego pola znajduje siê wioska<BR>
 	 * <strong>false</strong> - jeœli w pobli¿u danego pola nie znajduje siê wioska
 	 */
-	public static Boolean isvillage(int x,int y) {
-		return isvillage1(x,y);
-	}
 	private static Boolean isvillage1(int x,int y) {
 		/**
 		 * Funkcja sprawdzazj¹ca czy na danym polu jest wybudowana droga
 		 */
 		if (x<0||x==Simulation.jakirozmiar()||y<0||y==Simulation.jakirozmiar()) {
-			System.out.println("POZA GRANICAMI WSZECHSWIATA");
 			return true;
 		}
 		x=x+1;
 		if(x<rozmiarplanszy&&y<rozmiarplanszy&&y>=0&&x>=0) {
 			if(table.getValueAt(x, y)=="O11"||table.getValueAt(x, y)=="O12"||table.getValueAt(x, y)=="O13"||table.getValueAt(x, y)=="O14"||table.getValueAt(x, y)=="O21"||table.getValueAt(x, y)=="O22"||table.getValueAt(x, y)=="O23"||table.getValueAt(x, y)=="O24"||table.getValueAt(x, y)=="O31"||table.getValueAt(x, y)=="O32"||table.getValueAt(x, y)=="O33"||table.getValueAt(x, y)=="O34"||table.getValueAt(x, y)=="O41"||table.getValueAt(x, y)=="O42"||table.getValueAt(x, y)=="O43"||table.getValueAt(x, y)=="O44") {
-				System.out.println("TUTAJ JEST WIOSKA: "+x+","+y);
 				return true;
 			}
 		}
 		x=x-2;
 		if(x<rozmiarplanszy&&y<rozmiarplanszy&&y>=0&&x>=0) {
 			if(table.getValueAt(x, y)=="O11"||table.getValueAt(x, y)=="O12"||table.getValueAt(x, y)=="O13"||table.getValueAt(x, y)=="O14"||table.getValueAt(x, y)=="O21"||table.getValueAt(x, y)=="O22"||table.getValueAt(x, y)=="O23"||table.getValueAt(x, y)=="O24"||table.getValueAt(x, y)=="O31"||table.getValueAt(x, y)=="O32"||table.getValueAt(x, y)=="O33"||table.getValueAt(x, y)=="O34"||table.getValueAt(x, y)=="O41"||table.getValueAt(x, y)=="O42"||table.getValueAt(x, y)=="O43"||table.getValueAt(x, y)=="O44") {
-				System.out.println("TUTAJ JEST WIOSKA: "+x+","+y);
 				return true;
 			}
 		}
@@ -384,22 +425,18 @@ public class GUI2 implements ActionListener{
 		y=y+1;
 		if(x<rozmiarplanszy&&y<rozmiarplanszy&&y>=0&&x>=0) {
 			if(table.getValueAt(x, y)=="O11"||table.getValueAt(x, y)=="O12"||table.getValueAt(x, y)=="O13"||table.getValueAt(x, y)=="O14"||table.getValueAt(x, y)=="O21"||table.getValueAt(x, y)=="O22"||table.getValueAt(x, y)=="O23"||table.getValueAt(x, y)=="O24"||table.getValueAt(x, y)=="O31"||table.getValueAt(x, y)=="O32"||table.getValueAt(x, y)=="O33"||table.getValueAt(x, y)=="O34"||table.getValueAt(x, y)=="O41"||table.getValueAt(x, y)=="O42"||table.getValueAt(x, y)=="O43"||table.getValueAt(x, y)=="O44") {
-				System.out.println("TUTAJ JEST WIOSKA: "+x+","+y);
 				return true;
 			}
 		}
 		y=y-2;
 		if(x<rozmiarplanszy&&y<rozmiarplanszy&&y>=0&&x>=0) {
 			if(table.getValueAt(x, y)=="O11"||table.getValueAt(x, y)=="O12"||table.getValueAt(x, y)=="O13"||table.getValueAt(x, y)=="O14"||table.getValueAt(x, y)=="O21"||table.getValueAt(x, y)=="O22"||table.getValueAt(x, y)=="O23"||table.getValueAt(x, y)=="O24"||table.getValueAt(x, y)=="O31"||table.getValueAt(x, y)=="O32"||table.getValueAt(x, y)=="O33"||table.getValueAt(x, y)=="O34"||table.getValueAt(x, y)=="O41"||table.getValueAt(x, y)=="O42"||table.getValueAt(x, y)=="O43"||table.getValueAt(x, y)=="O44") {
-				System.out.println("TUTAJ JEST WIOSKA: "+x+","+y);
 				return true;
 			}
 		}
 			return false;
 		}
-	public static Boolean canibuild(int x,int y) {
-		return canibuild1(x,y);
-	}
+
 	/**
 	 * Funkcja sprawdzaj¹ca czy na danym polu mo¿na coœ wybudowaæ
 	 * @param x kolumna
@@ -418,47 +455,42 @@ public class GUI2 implements ActionListener{
 			return false;
 		}
 	}
-	public static void putvaluetab(String s,int x, int y) {
-		putvaluetab1(s, x, y);
-	}
+	/**
+	 * Funkcja umieszczaj¹ca obiekty na mapie
+	 * @param s nazwa obiektu
+	 * @param x kolumna
+	 * @param y rzad
+	 */
 	private static void putvaluetab1(String s,int x, int y) {
 		table.setValueAt(s, x, y);
 	}
-	public static void putvaluetab2(String s,int x, int y) {
-		putvaluetab21(s, x, y);
-	}
+	/**
+	 * Funkcja umieszczaj¹ca obiekty na mapie surowców
+	 * @param s jaki surowiec
+	 * @param x kolumna
+	 * @param y rzad
+	 */
 	private static void putvaluetab21(String s,int x, int y) {
 		table2.setValueAt(s, x, y);
 	}
-	public static void putvaluetab3(String s,int x, int y) {
-		putvaluetab31(s, x, y);
-	}
-	private static void putvaluetab31(String s,int x, int y) {
-		table1.setValueAt(s, x, y);
-	}
-	
-	
-	public static String getvaluetab(int x, int y) {
-		Object abc =table.getValueAt(x, y);
-		return abc.toString();
-	}
-	private static String getvaluetab11(int x, int y) {
-		Object abc =table1.getValueAt(x, y);
-		return abc.toString();
-	}
-	public static String getvaluetab1(int x, int y) {
-		return getvaluetab11(x,y);
-	}
+	/**
+	 * Funkcja zwracaj¹ca wartoœæ pola
+	 * @param x kolumna
+	 * @param y rzad
+	 * @return surowiec
+	 */
 	private static String getvaluetab21(int x, int y) {
 		Object abc =table2.getValueAt(x, y);
 		return abc.toString();
 	}
-	public static String getvaluetab2(int x, int y) {
-		return getvaluetab21(x,y);
-	}
-	public static void labeling(int n,int s,int i, int w, int c) {
-		labeling1(n,s,i,w,c);
-	}
+	/**
+	 * Funkcja umieszczaj¹ca ilosc surowców na tablicy wyników
+	 * @param n która wioska
+	 * @param s ilosc kamienia
+	 * @param i ilosc zelaza
+	 * @param w ilosc drewna
+	 * @param c ilosc gliny
+	 */
 	private static void labeling1(int n,int s,int i, int w, int c) {
 		if(n==0) {
 			stone1.setText(String.valueOf(s));
@@ -485,9 +517,14 @@ public class GUI2 implements ActionListener{
 			clay4.setText(String.valueOf(c));
 		}
 	}
-	public static void labeling2(int n,int s,int i, int w, int c) {
-		labeling21(n,s,i,w,c);
-	}
+	/**
+	 * Funkcja umieszczajaca wartoœæ przychodów frakcji na tablicy wyników
+	 * @param n która wioska
+	 * @param s ilosc kamienia
+	 * @param i ilosc zelaza
+	 * @param w ilosc drewna
+	 * @param c ilosc gliny
+	 */
 	private static void labeling21(int n,int s,int i, int w, int c) {
 		String x="(+";
 		String d=")";
@@ -517,9 +554,6 @@ public class GUI2 implements ActionListener{
 			clay41.setText(String.valueOf(x+c+d));
 		}
 	}
-	public static Boolean isfull(int mapsize) {
-		return isfull1(mapsize);
-	}
 	/**
 	 * Funkcja sprawdzaj¹ca, czy mapa zosta³a zape³niona
 	 * @param mapsize - rozmiar mapy wprowadzony na pocz¹tku symulacji
@@ -527,40 +561,14 @@ public class GUI2 implements ActionListener{
 	 * <strong> false </strong>- je¿eli na mapie znajduj¹ siê pola które mo¿na zape³niæ
 	 */
 	private static Boolean isfull1(int mapsize){
-		System.out.println("Sprawdzam czy plansza jest zapelniona");
 		for(int i=0;i<mapsize;i++) {
 			for(int j=0;j<mapsize;j++) {
 				if(table.getValueAt(i, j)=="1"||table.getValueAt(i, j)=="2"||table.getValueAt(i, j)=="3"||table.getValueAt(i, j)=="4") {
-					System.out.println("Plansza nie zapelniona");
 					return false;
 				}
 			}
 		}
-		System.out.println("Plansza zape³niona");
 		return true;
-	}
-	@Override
-	public void actionPerformed(ActionEvent e) {
-		Object source = e.getSource();
-		if(source == button1)
-		{ 	
-			Simulation.setstart();
-			map1 = new Map_Generator( Simulation.jakirozmiar(),Simulation.ilefrakcji());	
-			button1.setVisible(false);
-			button2.setVisible(true);
-		}
-		if(source == button2) {
-			Simulation.setcontinuetrue();
-			button2.setVisible(false);
-			button3.setVisible(true);
-			button2.setText("Kontynuuj");
-		}
-		if(source == button3) {
-			Simulation.setcontinuefalse();
-			button3.setVisible(false);
-			button2.setVisible(true);
-			System.out.println("SYMULACJA WSTRZYMANA");
-		}
 	}
 }
 

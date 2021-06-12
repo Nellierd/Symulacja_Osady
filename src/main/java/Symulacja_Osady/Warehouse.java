@@ -4,17 +4,49 @@ package Symulacja_Osady;
  * @author Nenaki
  *
  */
-public class Warehouse implements InterfaceWarehouse {
+public class Warehouse {
 	private int stone;
 	private int iron;
 	private int wood;
 	private int clay;
-	
 	public Warehouse() {
 		this.stone=0;
 		this.iron=0;
 		this.wood=0;
 		this.clay=0;
+	}
+	public void getRes(int a,int b, int c, int d) {
+		getRes1(a,b,c,d);
+	}
+	public void minRes(int a, int b, int c, int d) {
+		minRes1(a,b,c,d);
+	}
+	public int ilestones() {
+		return ilestones1();
+	}
+	public int ileiron() {
+		return ileiron1();
+	}
+	public int ileclay() {
+		return ileclay1();
+	}
+	public int ilewood() {
+		return ilewood1();
+	}
+	public Boolean canibuildroad() {
+		return canibuildroad1();
+	}
+	public Boolean canibuildvillage() {
+		return canibuildvillage1();
+	}
+	public void bank() {
+		bank1();
+	}
+	public void wymiana(int nr) {
+		wymiana1(nr);
+	}
+	public Boolean doiwant(String what, String forwhat) {
+		return doiwant1(what,forwhat);
 	}
 	/**
 	 * Funkcja dodaj¹ca surowce
@@ -29,9 +61,6 @@ public class Warehouse implements InterfaceWarehouse {
 		this.wood=this.wood+c;
 		this.clay=this.clay+d;
 	}
-	public void getRes(int a,int b, int c, int d) {
-		getRes1(a,b,c,d);
-	}
 	/**
 	 * Funkcja odejmuj¹ca surowce
 	 * @param a iloœæ "Kamienia" do oddania
@@ -44,38 +73,35 @@ public class Warehouse implements InterfaceWarehouse {
 		this.iron=this.iron-b;
 		this.wood=this.wood-c;
 		this.clay=this.clay-d;
-}
-	public void minRes(int a, int b, int c, int d) {
-		minRes1(a,b,c,d);
 	}
 	/**
-	 * Funkcja wyœwietlaj¹ca aktualnie posiadane surowce
+	 * Funkcja zwracaj¹ca iloœæ kamienia w magazynie
+	 * @return iloœæ kamienia
 	 */
-	public int ilestones() {
-		return ilestones1();
-	}
 	private int ilestones1() {
 		return this.stone;
 	}
-	public int ileiron() {
-		return ileiron1();
-	}
+	/**
+	 * Funkcja zwracaj¹ca iloœæ ¿elaza w magazynie
+	 * @return iloœæ ¿elaza
+	 */
 	private int ileiron1() {
 		return this.iron;
 	}
-	public int ilewood() {
-		return ilewood1();
+	/**
+	 * Funkcja zwracaj¹ca iloœc kamienia w magazynie
+	 * @return iloœæ kamienia
+	 */
+	private int ilewood1() {
+		return this.wood;
 	}
-private int ilewood1() {
-	return this.wood;
-}
-public int ileclay() {
-	return ileclay1();
-}
-public int ileclay1() {
-	return this.clay;
-}
-
+	/**
+	 * Funkcja zwracaj¹ca iloœc gliny w magazynie
+	 * @return iloœæ glny
+	 */
+	private int ileclay1() {
+		return this.clay;
+	}
 	/**
 	 * Funkcja sprawdzaj¹ca czy w magazynie jest wystarczaj¹co surowców do budowy <strong>Drogi</strong>
 	 * @return <strong>true</strong> - jeœli iloœæ surowców w magazynie jest wystarczaj¹ca<BR>
@@ -87,13 +113,7 @@ public int ileclay1() {
 	}
 	else {
 	return false;
-	}
-	}
-	public Boolean canibuildroad() {
-		return canibuildroad1();
-	}
-	public Boolean canibuildvillage() {
-		return canibuildvillage1();
+		}
 	}
 	/**
 	 * Funkcja sprawdzaj¹ca czy w magazynie jest wystarczaj¹co surowców do budowy <strong>Wioski</strong>
@@ -108,14 +128,11 @@ public int ileclay1() {
 	return false;
 	}
 	}
-	public void bank() {
-		bank1();
-	}
+
 	/**
-	 * Funkcja która za zadanmie ma wymieniaæ surowce w stosunku B:A kiedy ¿aden gracz nie chce siê wymieniæ
+	 * Funkcja która za zadanie ma wymieniaæ surowce w stosunku B:A
 	 */
 	private void bank1() {
-		System.out.println("Wymieniam surowce");
 		if(ilestones()<2||ileiron()<2||ilewood()<2||ileclay()<2) {
 			if(ileiron()<2&&ilestones()>5) {
 				getRes(0,1,0,0);
@@ -167,29 +184,29 @@ public int ileclay1() {
 			}
 		}
 		else {
-			System.out.println("NIE POTRZEBUJESZ WYMIENIAC SUROWCOW");
 		}
 	}
-	public Boolean doiwant(String what, String forwhat) {
-		return doiwant1(what,forwhat);
-	}
-	public Boolean doiwant1(String what, String forwhat) {
+	/**
+	 * Funkcja sprawdzaj¹ca czy Frakcja chce siê wymieniæ za dany surowiec
+	 * @param what - surowiec jaki oferuje inna frakcja
+	 * @param forwhat - surowiec do oddania
+	 * @return <strong>true</strong> - jeœli chce siê wymienic <br>
+	 * <strong>false</strong> - jeœli nie chce siê wymieniæ
+	 */
+	private Boolean doiwant1(String what, String forwhat) {
 		if(forwhat=="stone") {
 			if(what=="iron") {
 				if(ilestones()<2&&ileiron()>2) {
-					System.out.println("Chce wymieniæ Kamien za zelazo");
 					return true;
 				}
 			}
 			if(what=="wood") {
 				if(ilestones()<2&&ilewood()>2) {
-					System.out.println("Chce wymieniæ Kamien za drewno");
 					return true;
 				}
 			}
 			if(what=="clay") {
 				if(ilestones()<2&&ileclay()>2) {
-					System.out.println("Chce wymieniæ Kamien za Gline");
 					return true;
 				}
 			}
@@ -245,14 +262,14 @@ public int ileclay1() {
 				}
 			}
 		}
-		System.out.println("Nie chce sie wymieniac z tb ciapciaku");
 		return false;
 	}
-	public void wymiana(int nr) {
-		wymiana1(nr);
-	}
+	/**
+	 * Funkcja sluzaca do wymiany z innymi frakcjami
+	 * @param nr - któr¹ frakcj¹ jestem
+	 */
 	private void wymiana1(int nr) {
-		if(ilestones()==0) {
+		if(ilestones()<=0) {
 		for (int i=0;i<Simulation.ilefrakcji();i++) {
 			if(i!=nr) {
 				InterfaceFrakcja trololo = Simulation.getfrakcje(i);
@@ -262,7 +279,6 @@ public int ileclay1() {
 						getRes(1, 0, 0, 0);
 						trololo.minRes(1, 0, 0, 0);
 						trololo.getRes(0, 1, 0, 0);
-						System.out.println("Dokonano wymiany surowcow");
 						break;
 						}
 					}
@@ -272,7 +288,6 @@ public int ileclay1() {
 						getRes(1, 0, 0, 0);
 						trololo.minRes(1, 0, 0, 0);
 						trololo.getRes(0, 0, 1, 0);
-						System.out.println("Dokonano wymiany surowcow");
 						break;
 							}
 				if(ileclay()>=ileiron()&&ileclay()>=ilewood()) {
@@ -281,7 +296,6 @@ public int ileclay1() {
 						getRes(1, 0, 0, 0);
 						trololo.minRes(1, 0, 0, 0);
 						trololo.getRes(0, 0, 0, 1);
-						System.out.println("Dokonano wymiany surowcow");
 						break;
 							}
 						}	
@@ -289,7 +303,7 @@ public int ileclay1() {
 				}	
 			}
 		}
-		if(ileiron()==0) {
+		if(ileiron()<=0) {
 			for (int i=0;i<Simulation.ilefrakcji();i++) {
 				if(i!=nr) {
 					InterfaceFrakcja trololo = Simulation.getfrakcje(i);
@@ -299,7 +313,6 @@ public int ileclay1() {
 							getRes(0, 1, 0, 0);
 							trololo.minRes(0, 1, 0, 0);
 							trololo.getRes(1, 0, 0, 0);
-							System.out.println("Dokonano wymiany surowcow");
 							break;
 							}
 						}
@@ -309,7 +322,6 @@ public int ileclay1() {
 							getRes(0, 1, 0, 0);
 							trololo.minRes(0, 1, 0, 0);
 							trololo.getRes(0, 0, 1, 0);
-							System.out.println("Dokonano wymiany surowcow");
 							break;
 								}
 					if(ileclay()>=ilestones()&&ileclay()>=ilewood()) {
@@ -318,7 +330,6 @@ public int ileclay1() {
 							getRes(0, 1, 0, 0);
 							trololo.minRes(0, 1, 0, 0);
 							trololo.getRes(0, 0, 0, 1);
-							System.out.println("Dokonano wymiany surowcow");
 							break;
 								}
 							}	
@@ -326,7 +337,7 @@ public int ileclay1() {
 					}	
 				}
 			}
-		if(ilewood()==0) {
+		if(ilewood()<=0) {
 			for (int i=0;i<Simulation.ilefrakcji();i++) {
 				if(i!=nr) {
 					InterfaceFrakcja trololo = Simulation.getfrakcje(i);
@@ -336,7 +347,6 @@ public int ileclay1() {
 							getRes(0, 0, 1, 0);
 							trololo.minRes(0, 0, 1, 0);
 							trololo.getRes(1, 0, 0, 0);
-							System.out.println("Dokonano wymiany surowcow");
 							break;
 							}
 						}
@@ -346,7 +356,6 @@ public int ileclay1() {
 							getRes(0, 0, 1, 0);
 							trololo.minRes(0, 0, 1, 0);
 							trololo.getRes(0, 1, 0, 0);
-							System.out.println("Dokonano wymiany surowcow");
 							break;
 								}
 					if(ileclay()>=ilestones()&&ileclay()>=ileiron()) {
@@ -355,7 +364,6 @@ public int ileclay1() {
 							getRes(0, 0, 1, 0);
 							trololo.minRes(0, 0, 1, 0);
 							trololo.getRes(0, 0, 0, 1);
-							System.out.println("Dokonano wymiany surowcow");
 							break;
 								}
 							}	
@@ -363,7 +371,7 @@ public int ileclay1() {
 					}	
 				}
 			}
-		if(ileclay()==0) {
+		if(ileclay()<=0) {
 			for (int i=0;i<Simulation.ilefrakcji();i++) {
 				if(i!=nr) {
 					InterfaceFrakcja trololo = Simulation.getfrakcje(i);
@@ -373,7 +381,6 @@ public int ileclay1() {
 							getRes(0, 0, 0, 1);
 							trololo.minRes(0, 0, 0, 1);
 							trololo.getRes(1, 0, 0, 0);
-							System.out.println("Dokonano wymiany surowcow");
 							break;
 							}
 						}
@@ -383,7 +390,6 @@ public int ileclay1() {
 							getRes(0, 0, 0, 1);
 							trololo.minRes(0, 0, 0, 1);
 							trololo.getRes(0, 1, 0, 0);
-							System.out.println("Dokonano wymiany surowcow");
 							break;
 								}
 					if(ilewood()>=ilestones()&&ilewood()>=ileiron()) {
@@ -392,7 +398,6 @@ public int ileclay1() {
 							getRes(0, 0, 0, 1);
 							trololo.minRes(0, 0, 0, 1);
 							trololo.getRes(0, 0, 1, 0);
-							System.out.println("Dokonano wymiany surowcow");
 							break;
 								}
 							}	
@@ -400,5 +405,5 @@ public int ileclay1() {
 					}	
 				}
 			}
-	}
+		}
 	}

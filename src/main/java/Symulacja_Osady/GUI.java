@@ -1,6 +1,3 @@
-/**
- * 
- */
 package Symulacja_Osady;
 
 import java.awt.event.ActionEvent;
@@ -13,6 +10,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 /**
+ * Graficzny interface s³u¿¹cy do wprowadzania parametrów symulacji.
  * @author Nenaki
  *
  */
@@ -35,22 +33,54 @@ public class GUI implements ActionListener{
 	private JLabel buttonlabel1;
 
 	public GUI() {
+		frameinitialization();
+		labelsbinitialization();
+		buttoninitialization();
+	}
+	/**
+	 * ActionListener, sprawdza który przycisk zosta³ wcisniêty.
+	 */
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		Object source = e.getSource();
+		Simulation.setjakirozmiar(Integer.parseInt(rozmiartext.getText()));
+		Simulation.setilefrakcji(Integer.parseInt(frakcjetext.getText()));
+		Simulation.setinkrementacje(Integer.parseInt(inkrementacjatext.getText()));
+		if(source == button)
+		{ 
+			Simulation.defaultvillagescreator();
+			Simulation.setstart1();
+			new GUI2(Simulation.jakirozmiar());
+			frame.setVisible(false);
+		}
+		if(source == button1) {
+			frame.setVisible(false);
+			new GUISettings(Integer.parseInt(frakcjetext.getText()));
+		}
+	}
+	/**
+	 * Inicjalizacja ramki
+	 */
+	private void frameinitialization() {
 		frame = new JFrame();
 		panel = new JPanel();
 		panel.setLayout(null);
 		frame.setSize(465,220);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.add(panel);
+		frame.setResizable(false);
 		frame.setTitle("Symulacja Osady - Konrad Ziêba");
-		
-		/**Panel do wprowadznia rozmiaru**/
+	}
+	/**
+	 * Inicjalizacja reszty komponentów graficznych
+	 */
+	private void labelsbinitialization() {
 		rozmiarlabel = new JLabel("Rozmiar:");
 		rozmiarlabel.setBounds(10, 20, 80, 25);
 		panel.add(rozmiarlabel);
 		rozmiarlabel1 = new JLabel("(Wprowadz wartoœæ <4-15>)");
 		rozmiarlabel1.setBounds(275, 20, 180, 25);
 		panel.add(rozmiarlabel1);
-
 		rozmiartext = new JTextField(20);
 		rozmiartext.setBounds(100,20,165,25);
 		panel.add(rozmiartext);
@@ -69,11 +99,16 @@ public class GUI implements ActionListener{
 		surowcelabel1 = new JLabel("(Wprowadz wartoœæ x>0)");
 		surowcelabel1.setBounds(275, 80, 180, 25);
 		panel.add(surowcelabel1);
-		
 		inkrementacjatext = new JTextField(20);
 		inkrementacjatext.setBounds(100,80,165,25);
-		
-
+		panel.add(inkrementacjatext);
+		panel.add(surowcelabel);
+		panel.add(frakcjelabel);
+	}
+	/**
+	 * Inicjalizacja przycisków
+	 */
+	private void buttoninitialization() {
 		button = new JButton("Symulacja domyœlna");
 		button.addActionListener(this);
 		button.setBounds(10,110,190,25);
@@ -89,28 +124,6 @@ public class GUI implements ActionListener{
 		buttonlabel1 = new JLabel("(Ustaw zachowanie)");
 		buttonlabel1.setBounds(210, 145, 180, 25);
 		panel.add(buttonlabel1);
-		panel.add(inkrementacjatext);
-		panel.add(surowcelabel);
-		panel.add(frakcjelabel);
 		frame.setVisible(true);
-	}
-
-	@Override
-	public void actionPerformed(ActionEvent e) {
-		Object source = e.getSource();
-		Simulation.setjakirozmiar(Integer.parseInt(rozmiartext.getText()));
-		Simulation.setilefrakcji(Integer.parseInt(frakcjetext.getText()));
-		Simulation.setinkrementacje(Integer.parseInt(inkrementacjatext.getText()));
-		if(source == button)
-		{ 
-			Simulation.defaultvillagescreator();
-			Simulation.setstart1();
-			new GUI2(Simulation.jakirozmiar());
-			frame.setVisible(false);
-		}
-		if(source == button1) {
-			frame.setVisible(false);
-			new GUISettings(Integer.parseInt(frakcjetext.getText()));
-		}
 	}
 }

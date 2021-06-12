@@ -8,15 +8,22 @@ import javax.swing.JLabel;
 import javax.swing.JTable;
 import javax.swing.SwingConstants;
 import javax.swing.table.TableCellRenderer;
- 
+ /**
+  * Renderer graficzny dla GUI2, dla wartości tabeli odpowiednio maluje tabele colorami:<br>
+  * <strong>Szary</strong> - gdy na polu znajduje się kamień <br>
+  * <strong>Niebieski</strong> - gdy na polu znajduje się żelazo <br>
+  * <strong>Zielony</strong> - gdy na polu znajduje się drewno <br>
+  * <strong>Pomarańcz</strong> - gdy na polu znajduje się glina <br>
+  * Oznacza też kolor teksu w zależności od tego do której frakcji należy obiekt.
+  * @author Nenaki
+  *
+  */
 public class BoardRenderer extends JLabel implements TableCellRenderer
 {
- 
-    public BoardRenderer()
+	private static final long serialVersionUID = 1L;
+	public BoardRenderer()
     {
         super.setOpaque(true);
-        //super.setFont(new Font("Consolas", Font.BOLD, 14));
-        //super.setForeground(Color.BLUE);
     }
      public static void getcolor(int i, int j) {
   
@@ -26,7 +33,7 @@ public class BoardRenderer extends JLabel implements TableCellRenderer
         boolean hasFocus, int row, int column)
     {
         String a=(String) value;
-        if(a == "1") {						//kamien
+        if(a == "1") {
         	super.setText("");
             super.setBackground(new Color(224,224,224));
         }
@@ -40,7 +47,6 @@ public class BoardRenderer extends JLabel implements TableCellRenderer
         }
         else if(a == "4") {					//glina
         	super.setText("");
-        	//super.setText(Symulacja_Osady.GUI2.table1.getValue(row,column));
             super.setBackground(new Color(255,204,153));
         }
         else if(a == "R11") {
@@ -299,27 +305,6 @@ else if(a == "Road44") {
 	super.setBackground(new Color(255,204,153));
     super.setForeground(Color.MAGENTA);
 }
-       /* else if(a == "6") {
-        	super.setText("O");
-        	super.setBackground(Color.GREEN);
-            super.setForeground(Color.BLUE);
-        }
-        else if(a == "7") {
-        	super.setText("O");
-        	super.setBackground(Color.GREEN);
-            super.setForeground(Color.RED);
-        }
-        else if(a == "8") {
-        	super.setText("O");
-        	super.setBackground(Color.GREEN);
-            super.setForeground(Color.YELLOW);
-        }
-        else if(a == ""){
-        	super.setText(" ");
-        }
-       */ 	
-        //super.setFont(new Font("Courier New", Font.ITALIC, 12));
-        //super.setForeground(Color.BLUE);
         return this;
     }
      

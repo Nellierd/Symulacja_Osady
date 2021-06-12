@@ -1,5 +1,7 @@
 package Symulacja_Osady;
-
+/**
+ * Implementacja interface'u Frakcji
+ */
 import java.util.ArrayList;
 import java.util.Map;
 

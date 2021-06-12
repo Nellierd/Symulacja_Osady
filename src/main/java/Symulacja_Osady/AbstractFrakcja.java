@@ -4,7 +4,11 @@ import java.util.ArrayList;
 import java.util.Map;
 import java.util.TreeMap;
 import java.util.concurrent.ThreadLocalRandom;
-
+/**
+ * Klasa abstrakcyjna, która jest podstaw¹ dla pozosta³ych frakcji w tej symulacji
+ * @author Nenaki
+ *
+ */
 public abstract class AbstractFrakcja {
 
 	public Warehouse warehouse;
@@ -19,12 +23,60 @@ public abstract class AbstractFrakcja {
 		this.villages = new TreeMap<>();
 		this.roads = new TreeMap<>();
 	}
+	public void putvillages(int i,int j) {
+		putvillages1(i,j);
+	}
+	public int whatnumber() {
+		return whatnumber1();
+	}
+	public void putroads(int i,int j) {
+		putroads1(i,j);
+	}
+	public ArrayList<Integer> gettvillages(int i){
+		return gettvillages1(i);
+	}
+	public ArrayList<Integer> getroads(int i){
+		return getroads1(i);
+	}
+	public void buildroad(Map<Integer, ArrayList<Integer>> abc) {
+		buildroad1(abc);
+	}
+	public void buildvillage() {
+		buildvillage1();
+	}
+	public void checkvillages() {
+		checkvillages1();
+	}
+	public int ilevillages() {
+		return ilevillages1();
+	}
+	private int ilevillages1() {
+		return villages.size();
+	}
+	public int ileroads() {
+		return ileroads1();
+	}
+	private int ileroads1() {
+		return roads.size();
+	}
+	public Boolean doiwant(String a, String b) {
+		return doiwant1(a,b);
+	}
+	public void minRes(int a,int b,int c,int d) {
+		minRes1(a,b,c,d);
+	}
+	public void getRes(int a,int b,int c,int d) {
+		getRes1(a,b,c,d);
+	}
+	public void tura() {
+		tura1();
+	}
 	/**
 	 * Funkcja s³u¿¹ca do umieszczania danej wioski na liœcie
 	 * @param i Kolumna
 	 * @param j Wiersz
 	 */
-	public void putvillages(int i,int j) {
+	private void putvillages1(int i,int j) {
 
 		ArrayList<Integer> tab = new ArrayList<Integer>();
 		tab.add(0, i);
@@ -36,7 +88,7 @@ public abstract class AbstractFrakcja {
 	 * @param i Kolumna
 	 * @param j Wiersz
 	 */
-	public void putroads(int i,int j) {
+	private void putroads1(int i,int j) {
 
 		ArrayList<Integer> tab = new ArrayList<Integer>();
 		tab.add(0, i);
@@ -48,7 +100,7 @@ public abstract class AbstractFrakcja {
 	 * @param i Klucz danej wioski
 	 * @return Wektor licz bêd¹cy koordynatami danej wioski
 	 */
-	public ArrayList<Integer> gettvillages(int i) {
+	private ArrayList<Integer> gettvillages1(int i) {
 		return villages.get(i);
 	}
 	/**
@@ -56,14 +108,14 @@ public abstract class AbstractFrakcja {
 	 * @param i Klucz danej wioski
 	 * @return Wektor licz bêd¹cy koordynatami danej Drogi
 	 */
-	public ArrayList<Integer> getroads(int i) {
+	private ArrayList<Integer> getroads1(int i) {
 		return roads.get(i);
 	}
 	/**
 	 * Funkcja buduj¹ca drogê
 	 * @param abc Mapa obiektów obok których ma siê pojawiæ dana wioska
 	 */
-	public void buildroad(Map<Integer, ArrayList<Integer>> abc) {
+	private void buildroad1(Map<Integer, ArrayList<Integer>> abc) {
 		int a=0;
 		int b=0;
 		int a1=0;
@@ -156,7 +208,6 @@ public abstract class AbstractFrakcja {
 				if (GUI2.whatresources(a, b)==4) {
 					GUI2.putvaluetab("Road14", a, b);
 				}
-				System.out.println("BUDUJE DROWE FRAKCJI 1 W PUNKCIE: "+a+","+b);
 			}
 			if (nrfr==1) {
 				if (GUI2.whatresources(a, b)==1) {
@@ -171,7 +222,6 @@ public abstract class AbstractFrakcja {
 				if (GUI2.whatresources(a, b)==4) {
 					GUI2.putvaluetab("Road24", a, b);
 				}
-				System.out.println("BUDUJE DROWE FRAKCJI 2 W PUNKCIE: "+a+","+b);
 			}
 			if (nrfr==2) {
 				if (GUI2.whatresources(a, b)==1) {
@@ -186,7 +236,6 @@ public abstract class AbstractFrakcja {
 				if (GUI2.whatresources(a, b)==4) {
 					GUI2.putvaluetab("Road34", a, b);
 				}
-				System.out.println("BUDUJE DROWE FRAKCJI 3 W PUNKCIE: "+a+","+b);
 			}
 			if (nrfr==3) {
 				if (GUI2.whatresources(a, b)==1) {
@@ -201,14 +250,12 @@ public abstract class AbstractFrakcja {
 				if (GUI2.whatresources(a, b)==4) {
 					GUI2.putvaluetab("Road44", a, b);
 				}
-				System.out.println("BUDUJE DROWE FRAKCJI 4 W PUNKCIE: "+a+","+b);
 			}
 			warehouse.minRes(2, 0, 0, 1);
 			putroads(a,b);
 		}
 		else {
 			building2=false;
-			System.out.println("NIE MOZNA ZBUDOWAC DROGI");
 		}
 		
 	}
@@ -216,7 +263,7 @@ public abstract class AbstractFrakcja {
 	 * Funkcja do budowania wiosek <p>
 	 * <strong>Uwaga:</strong> z uwagi na za³o¿enia implementacji wioska budowana jest obok dróg
 	 */
-	public void buildvillage() {
+	private void buildvillage1() {
 		int a=0;
 		int b=0;
 		int a1=0;
@@ -318,7 +365,6 @@ public abstract class AbstractFrakcja {
 				if (GUI2.whatresources(a, b)==4) {
 					GUI2.putvaluetab("R14", a, b);
 				}
-				System.out.println("BUDUJE WIOSKE FRAKCJI 1 W PUNKCIE: "+a+","+b);
 			}
 			if (nrfr==1) {
 				if (GUI2.whatresources(a, b)==1) {
@@ -333,7 +379,6 @@ public abstract class AbstractFrakcja {
 				if (GUI2.whatresources(a, b)==4) {
 					GUI2.putvaluetab("R24", a, b);
 				}
-				System.out.println("BUDUJE WIOSKE FRAKCJI 2 W PUNKCIE: "+a+","+b);
 			}
 			if (nrfr==2) {
 				if (GUI2.whatresources(a, b)==1) {
@@ -348,7 +393,6 @@ public abstract class AbstractFrakcja {
 				if (GUI2.whatresources(a, b)==4) {
 					GUI2.putvaluetab("R34", a, b);
 				}
-				System.out.println("BUDUJE WIOSKE FRAKCJI 3 W PUNKCIE: "+a+","+b);
 			}
 			if (nrfr==3) {
 				if (GUI2.whatresources(a, b)==1) {
@@ -363,13 +407,11 @@ public abstract class AbstractFrakcja {
 				if (GUI2.whatresources(a, b)==4) {
 					GUI2.putvaluetab("R44", a, b);
 				}
-				System.out.println("BUDUJE WIOSKE FRAKCJI 4 W PUNKCIE: "+a+","+b);
 			}
 			warehouse.minRes(1, 1, 1, 1);
 			putvillages(a,b);
 		}
 		else {
-			System.out.println("NIE MOZNA TUTAJ TEGO ZBUDOWAC");
 			building=false;
 		}
 		
@@ -378,12 +420,11 @@ public abstract class AbstractFrakcja {
 	 * Funkcja pobieraj¹ca surowce z planszy<p>
 	 * 
 	 */
-	public void checkvillages(){
+	private void checkvillages1(){
 		int stone=0;
 		int irone=0;
 		int wood=0;
 		int clay=0;
-		
 		for (int i=0;i<villages.size();i++) {
 		ArrayList<Integer> xyz=villages.get(i);
 		int osc=xyz.get(1);
@@ -398,11 +439,6 @@ public abstract class AbstractFrakcja {
 		int zmienna3 = GUI2.whatresources(osc, osr);
 		osr=osr-2;
 		int zmienna4 = GUI2.whatresources(osc, osr);
-		//System.out.println(GUI2.table2.getValueAt(xyz.get(1),xyz.get(0)));
-		//System.out.println("Kolumna:"+xyz.get(0));
-		//System.out.println("Wiersz:"+xyz.get(1));
-		//System.out.println("Doszed³em tutaj:columna: "+ xyz.get(0) +"wiersz" + xyz.get(1));
-		//System.out.println("Zmienna:"+zmienna);
 		if(zmienna==1)
 			stone++;
 		if(zmienna==2)
@@ -447,13 +483,6 @@ public abstract class AbstractFrakcja {
 		this.warehouse.getRes(stone, irone, wood, clay);
 		GUI2.labeling2(nrfr, stone, irone, wood, clay);
 	}
-
-	public int ilevillages() {
-		return villages.size();
-	}
-	public int ileroads() {
-		return roads.size();
-	}
 	/**
 	 * Funkcja sprawdzaj¹ca czy wioska chce dany surowiec
 	 * @param what - surowiec jaki chce oddaæ inna wioska
@@ -465,29 +494,30 @@ public abstract class AbstractFrakcja {
 	/**
 	 * Funkcja s³u¿¹ca do implementacji tury Frakcji
 	 */
-	public Boolean doiwant(String a, String b) {
+	private Boolean doiwant1(String a, String b) {
 		return warehouse.doiwant(a, b);
 	}
-	public void minRes(int a,int b,int c,int d) {
+	private void minRes1(int a,int b,int c,int d) {
 		warehouse.minRes(a, b, c, d);
 	}
-	public void getRes(int a,int b,int c,int d) {
+	private void getRes1(int a,int b,int c,int d) {
 		warehouse.getRes(a, b, c, d);
 	}
 	public void wymiana (int a) {
+		wymiana1(a);
+	}
+	private void wymiana1(int a) {
 		warehouse.wymiana(a);
 	}
-	public void tura() {
+	private void tura1() {
 		checkvillages();//Dodanie zasobów na poczatku tury
 		GUI2.labeling(nrfr, warehouse.ilestones(), warehouse.ileiron(), warehouse.ilewood(), warehouse.ileclay());
 		wymiana(nrfr);
 		GUI2.labeling(nrfr, warehouse.ilestones(), warehouse.ileiron(), warehouse.ilewood(), warehouse.ileclay());
 		warehouse.bank();
 		GUI2.labeling(nrfr, warehouse.ilestones(), warehouse.ileiron(), warehouse.ilewood(), warehouse.ileclay());
-		//this.warehouse.ileRes();//Wyœwietlenie iloœci zasobów
 		if(warehouse.canibuildvillage()==true&&roads.size()>1) {
 			while(warehouse.canibuildvillage()==true&&building==true) {
-			System.out.println("WIOSKA: "+nrfr+" CHCE BUDOWAÆ WIOSKE!!!");
 			buildvillage();
 			}
 		}
@@ -496,26 +526,25 @@ public abstract class AbstractFrakcja {
 			while(warehouse.canibuildroad()==true&&building2==true) {
 			int randomNum = ThreadLocalRandom.current().nextInt(0, 2);
 			if(randomNum==0&&roads.size()>0) {
-			System.out.println("WIOSKA: "+nrfr+" CHCE BUDOWAÆ DROGE OBOK WIOSKI");
 			buildroad(villages);
 			}
 			if(randomNum==1||roads.size()==0) {
-				System.out.println("WIOSKA: "+nrfr+" CHCE BUDOWAÆ DROGE OBOK DROGI");
 				buildroad(roads);
 				}
 		}
 		}
 		if(warehouse.canibuildroad()==true&&roads.size()==0)
 		{
-			System.out.println("WIOSKA: "+nrfr+" CHCE BUDOWAÆ DROGE");
 			buildroad(villages);
-			//this.warehouse.ileRes();
 		}
 		building=true;
 		building2=true;
 	}
-
-public int whatnumber() {
+/**
+ * Funkcja zwracajaca numer frakcji
+ * @return numer frakcji
+ */
+private int whatnumber1() {
 	return nrfr;
 }
 }
