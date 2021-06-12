@@ -256,9 +256,9 @@ public class GUISettings implements ItemListener, ActionListener {
 						Simulation.advvillagecreator(3, 0);
 					}
 				}
-			Simulation.start1 = true;
+			Simulation.setstart1();
 			Map_Generator.setstart();
-			new GUI2(Simulation.rozmiar);
+			new GUI2(Simulation.jakirozmiar());
 			frame.setVisible(false);
 		}
 		

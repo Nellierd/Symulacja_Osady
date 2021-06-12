@@ -98,14 +98,14 @@ public class GUI implements ActionListener{
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		Object source = e.getSource();
-		Simulation.rozmiar = Integer.parseInt(rozmiartext.getText());
-		Simulation.frakcje = Integer.parseInt(frakcjetext.getText());
-		Simulation.inkrementacja = Integer.parseInt(inkrementacjatext.getText());
+		Simulation.setjakirozmiar(Integer.parseInt(rozmiartext.getText()));
+		Simulation.setilefrakcji(Integer.parseInt(frakcjetext.getText()));
+		Simulation.setinkrementacje(Integer.parseInt(inkrementacjatext.getText()));
 		if(source == button)
 		{ 
 			Simulation.defaultvillagescreator();
-			Simulation.start1 = true;
-			new GUI2(Simulation.rozmiar);
+			Simulation.setstart1();
+			new GUI2(Simulation.jakirozmiar());
 			frame.setVisible(false);
 		}
 		if(source == button1) {

@@ -51,23 +51,28 @@ public class Warehouse implements InterfaceWarehouse {
 	/**
 	 * Funkcja wyœwietlaj¹ca aktualnie posiadane surowce
 	 */
-	public void ileRes() {
-		System.out.println("Mam "+this.stone+" kamienia");
-		System.out.println("Mam "+this.iron+" zelaza");
-		System.out.println("Mam "+this.wood+" drewna");
-		System.out.println("Mam "+this.clay+" gliny");
-}
 	public int ilestones() {
+		return ilestones1();
+	}
+	private int ilestones1() {
 		return this.stone;
 	}
 	public int ileiron() {
+		return ileiron1();
+	}
+	private int ileiron1() {
 		return this.iron;
 	}
-
-public int ilewood() {
+	public int ilewood() {
+		return ilewood1();
+	}
+private int ilewood1() {
 	return this.wood;
 }
 public int ileclay() {
+	return ileclay1();
+}
+public int ileclay1() {
 	return this.clay;
 }
 
@@ -87,12 +92,15 @@ public int ileclay() {
 	public Boolean canibuildroad() {
 		return canibuildroad1();
 	}
+	public Boolean canibuildvillage() {
+		return canibuildvillage1();
+	}
 	/**
 	 * Funkcja sprawdzaj¹ca czy w magazynie jest wystarczaj¹co surowców do budowy <strong>Wioski</strong>
 	 * @return <strong>true</strong> - jeœli iloœæ surowców w magazynie jest wystarczaj¹ca<BR>
 	 * <strong>false</strong> - jeœli iloœæ surowców w magazynie jest niewystarczaj¹ca
 	 */
-	public Boolean canibuildvillage() {
+	private Boolean canibuildvillage1() {
 	if(this.stone>=1&&this.clay>=1&&this.wood>=1&&this.iron>=1) {
 	return true;
 	}
@@ -245,7 +253,7 @@ public int ileclay() {
 	}
 	private void wymiana1(int nr) {
 		if(ilestones()==0) {
-		for (int i=0;i<Simulation.frakcje;i++) {
+		for (int i=0;i<Simulation.ilefrakcji();i++) {
 			if(i!=nr) {
 				InterfaceFrakcja trololo = Simulation.getfrakcje(i);
 				if(ileiron()>=ilewood()&&ileiron()>=ileclay()) {
@@ -282,7 +290,7 @@ public int ileclay() {
 			}
 		}
 		if(ileiron()==0) {
-			for (int i=0;i<Simulation.frakcje;i++) {
+			for (int i=0;i<Simulation.ilefrakcji();i++) {
 				if(i!=nr) {
 					InterfaceFrakcja trololo = Simulation.getfrakcje(i);
 					if(ilestones()>=ilewood()&&ilestones()>=ileclay()) {
@@ -319,7 +327,7 @@ public int ileclay() {
 				}
 			}
 		if(ilewood()==0) {
-			for (int i=0;i<Simulation.frakcje;i++) {
+			for (int i=0;i<Simulation.ilefrakcji();i++) {
 				if(i!=nr) {
 					InterfaceFrakcja trololo = Simulation.getfrakcje(i);
 					if(ilestones()>=ileiron()&&ilestones()>=ileclay()) {
@@ -356,7 +364,7 @@ public int ileclay() {
 				}
 			}
 		if(ileclay()==0) {
-			for (int i=0;i<Simulation.frakcje;i++) {
+			for (int i=0;i<Simulation.ilefrakcji();i++) {
 				if(i!=nr) {
 					InterfaceFrakcja trololo = Simulation.getfrakcje(i);
 					if(ilestones()>=ileiron()&&ilestones()>=ilewood()) {

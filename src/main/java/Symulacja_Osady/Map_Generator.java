@@ -25,27 +25,27 @@ public class Map_Generator {
 				int randomNum = ThreadLocalRandom.current().nextInt(1, 5);
 				tablica[i][j]=randomNum;
 				if(randomNum==1) {
-					GUI2.table.setValueAt("1", i, j);
-					GUI2.table2.setValueAt("1", i, j);
+					GUI2.putvaluetab("1", i, j);
+					GUI2.putvaluetab2("1", i, j);
 				}
 				//if(randomNum==1)
 				if(randomNum==2) {
-					GUI2.table.setValueAt("2", i, j);
-					GUI2.table2.setValueAt("2", i, j);
+					GUI2.putvaluetab("2", i, j);
+					GUI2.putvaluetab2("2", i, j);
 				}
 				//if(randomNum==2)
 				//if(randomNum==3)
 				if(randomNum==3) {
-					GUI2.table.setValueAt("3", i, j);
-					GUI2.table2.setValueAt("3", i, j);
+					GUI2.putvaluetab("3", i, j);
+					GUI2.putvaluetab2("3", i, j);
 				}
 				//if(randomNum==4)
 				if(randomNum==4) {
-					GUI2.table.setValueAt("4", i, j);
-					GUI2.table2.setValueAt("4", i, j);
+					GUI2.putvaluetab("4", i, j);
+					GUI2.putvaluetab2("4", i, j);
 				}
 				
-				GUI2.table1.setValueAt("", i, j);
+				GUI2.putvaluetab3("", i, j);
 				//Generowanie surowców na mapie
 				//System.out.println("mapa:"+i+" "+j+" " + mapa[i][j]);
 				
@@ -57,27 +57,27 @@ public class Map_Generator {
 			int randomNum1 = ThreadLocalRandom.current().nextInt(0, size);
 			int randomNum2 = ThreadLocalRandom.current().nextInt(0, size);
 			//System.out.println(randomNum1 + "  " + randomNum2);
-			while(GUI2.table1.getValueAt(randomNum1, randomNum2)!="")
+			while(GUI2.getvaluetab1(randomNum1, randomNum2)!="")
 			{
 				randomNum1 = ThreadLocalRandom.current().nextInt(0, size);
 				randomNum2 = ThreadLocalRandom.current().nextInt(0, size);
 				System.out.println("Powtorka" + randomNum1 + "  " + randomNum2);
 			}
-			
+	
 			//if(table1.getValueAt(randomNum1, randomNum2)=="")
-					GUI2.table1.setValueAt(k, randomNum1, randomNum2);
+					GUI2.putvaluetab3(String.valueOf(k), randomNum1, randomNum2);
 				if (k==0) {
-					if(GUI2.table2.getValueAt(randomNum1, randomNum2)=="1") {
-					GUI2.table.setValueAt("R11", randomNum1, randomNum2);
+					if(GUI2.getvaluetab2(randomNum1, randomNum2)=="1") {
+					GUI2.putvaluetab("R11", randomNum1, randomNum2);
 					}
-					if(GUI2.table2.getValueAt(randomNum1, randomNum2)=="2") {
-					GUI2.table.setValueAt("R12", randomNum1, randomNum2);
+					if(GUI2.getvaluetab2(randomNum1, randomNum2)=="2") {
+					GUI2.putvaluetab("R12", randomNum1, randomNum2);
 					}
-					if(GUI2.table2.getValueAt(randomNum1, randomNum2)=="3") {
-					GUI2.table.setValueAt("R13", randomNum1, randomNum2);
+					if(GUI2.getvaluetab2(randomNum1, randomNum2)=="3") {
+					GUI2.putvaluetab("R13", randomNum1, randomNum2);
 					}
-					if(GUI2.table2.getValueAt(randomNum1, randomNum2)=="4") {
-					GUI2.table.setValueAt("R14", randomNum1, randomNum2);
+					if(GUI2.getvaluetab2(randomNum1, randomNum2)=="4") {
+					GUI2.putvaluetab("R14", randomNum1, randomNum2);
 					}
 					//GUI2.table.setValueAt("R1", randomNum1, randomNum2);
 					while(simstarted==false) {
@@ -95,17 +95,17 @@ public class Map_Generator {
 					}
 
 				if (k==1) {
-					if(GUI2.table2.getValueAt(randomNum1, randomNum2)=="1") {
-					GUI2.table.setValueAt("R21", randomNum1, randomNum2);
+					if(GUI2.getvaluetab2(randomNum1, randomNum2)=="1") {
+					GUI2.putvaluetab("R21", randomNum1, randomNum2);
 					}
-					if(GUI2.table2.getValueAt(randomNum1, randomNum2)=="2") {
-					GUI2.table.setValueAt("R22", randomNum1, randomNum2);
+					if(GUI2.getvaluetab2(randomNum1, randomNum2)=="2") {
+					GUI2.putvaluetab("R22", randomNum1, randomNum2);
 					}
-					if(GUI2.table2.getValueAt(randomNum1, randomNum2)=="3") {
-					GUI2.table.setValueAt("R23", randomNum1, randomNum2);
+					if(GUI2.getvaluetab2(randomNum1, randomNum2)=="3") {
+					GUI2.putvaluetab("R23", randomNum1, randomNum2);
 					}
-					if(GUI2.table2.getValueAt(randomNum1, randomNum2)=="4") {
-					GUI2.table.setValueAt("R24", randomNum1, randomNum2);
+					if(GUI2.getvaluetab2(randomNum1, randomNum2)=="4") {
+					GUI2.putvaluetab("R24", randomNum1, randomNum2);
 					}
 					trololo.putvillages(randomNum1,randomNum2);
 					Simulation.putfrakcje(k, trololo);
@@ -114,17 +114,17 @@ public class Map_Generator {
 				}
 				if (k==2)
 				{
-					if(GUI2.table2.getValueAt(randomNum1, randomNum2)=="1") {
-					GUI2.table.setValueAt("R31", randomNum1, randomNum2);
+					if(GUI2.getvaluetab2(randomNum1, randomNum2)=="1") {
+					GUI2.putvaluetab("R31", randomNum1, randomNum2);
 					}
-					if(GUI2.table2.getValueAt(randomNum1, randomNum2)=="2") {
-					GUI2.table.setValueAt("R32", randomNum1, randomNum2);
+					if(GUI2.getvaluetab2(randomNum1, randomNum2)=="2") {
+					GUI2.putvaluetab("R32", randomNum1, randomNum2);
 					}
-					if(GUI2.table2.getValueAt(randomNum1, randomNum2)=="3") {
-					GUI2.table.setValueAt("R33", randomNum1, randomNum2);
+					if(GUI2.getvaluetab2(randomNum1, randomNum2)=="3") {
+					GUI2.putvaluetab("R33", randomNum1, randomNum2);
 					}
-					if(GUI2.table2.getValueAt(randomNum1, randomNum2)=="4") {
-					GUI2.table.setValueAt("R34", randomNum1, randomNum2);
+					if(GUI2.getvaluetab2(randomNum1, randomNum2)=="4") {
+					GUI2.putvaluetab("R34", randomNum1, randomNum2);
 					}
 
 					trololo.putvillages(randomNum1,randomNum2);
@@ -135,17 +135,17 @@ public class Map_Generator {
 				
 
 				if (k==3) {
-					if(GUI2.table2.getValueAt(randomNum1, randomNum2)=="1") {
-					GUI2.table.setValueAt("R41", randomNum1, randomNum2);
+					if(GUI2.getvaluetab2(randomNum1, randomNum2)=="1") {
+					GUI2.putvaluetab("R41", randomNum1, randomNum2);
 					}
-					if(GUI2.table2.getValueAt(randomNum1, randomNum2)=="2") {
-					GUI2.table.setValueAt("R42", randomNum1, randomNum2);
+					if(GUI2.getvaluetab2(randomNum1, randomNum2)=="2") {
+					GUI2.putvaluetab("R42", randomNum1, randomNum2);
 					}
-					if(GUI2.table2.getValueAt(randomNum1, randomNum2)=="3") {
-					GUI2.table.setValueAt("R43", randomNum1, randomNum2);
+					if(GUI2.getvaluetab2(randomNum1, randomNum2)=="3") {
+					GUI2.putvaluetab("R43", randomNum1, randomNum2);
 					}
-					if(GUI2.table2.getValueAt(randomNum1, randomNum2)=="4") {
-					GUI2.table.setValueAt("R44", randomNum1, randomNum2);
+					if(GUI2.getvaluetab2(randomNum1, randomNum2)=="4") {
+					GUI2.putvaluetab("R44", randomNum1, randomNum2);
 					}
 					Simulation.putfrakcje(k, trololo);
 					trololo.putvillages(randomNum1,randomNum2);
@@ -154,7 +154,7 @@ public class Map_Generator {
 				}
 					
 		}
-		Simulation.start3=true;
+		Simulation.setstart3();
 	}
 	public static void setstart() {
 		simstarted=true;

@@ -9,7 +9,7 @@ public class FrakcjaBandyta extends AbstractFrakcja implements InterfaceFrakcja 
 		super(i);
 	}
 	public void checkvillages(){
-		int randomNum = ThreadLocalRandom.current().nextInt(0, Simulation.frakcje);
+		int randomNum = ThreadLocalRandom.current().nextInt(0, Simulation.ilefrakcji());
 		if(randomNum!=whatnumber()) {
 			System.out.println(randomNum);
 			int a = (zlodziej/2);
@@ -19,6 +19,5 @@ public class FrakcjaBandyta extends AbstractFrakcja implements InterfaceFrakcja 
 			GUI2.labeling2(whatnumber(),a,a,a,a);
 			System.out.println("ODDAWAJ SUROWCE");
 		}
-		
 	}
 }

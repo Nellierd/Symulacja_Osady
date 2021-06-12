@@ -16,39 +16,24 @@ import java.util.concurrent.TimeUnit;
  *
  */
 public class Simulation {
-	public static int rozmiar;
-	public static int frakcje;
-	public static int inkrementacja;
-	public static Boolean start;
-	public static Boolean start1;
-	public static Boolean start3;
-	public static Boolean kontynuuj=false;
+	private static int rozmiar;
+	private static int frakcje;
+	private static int inkrementacja;
+	private static Boolean start=false;
+	private static Boolean start1=false;
+	private static Boolean start3=false;
+	private static Boolean kontynuuj=false;
 	private static Map<Integer,InterfaceFrakcja> mapfrakcji;
 	/**
 	 * @param args
 	 * @throws InterruptedException 
 	 */
 	public static void main(String[] args) throws InterruptedException {
-		start=false;
-		start1=false;
-		start3=false;
-		mapfrakcji = new TreeMap<>();
 		new GUI();
+		mapfrakcji = new TreeMap<>();
 		while(start1==false) {
 			TimeUnit.SECONDS.sleep(1);
 		}
-		/*for (int i=0;i<frakcje;i++) {
-			InterfaceFrakcja interfacegrakcja = new Frakcja(i);
-			mapfrakcji.put(i, interfacegrakcja);
-		}
-		InterfaceFrakcja interfacegrakcja0 = new Frakcja(0);
-		mapfrakcji.put(0, interfacegrakcja0);
-		InterfaceFrakcja interfacegrakcja1 = new FrakcjaOffensive(1);
-		mapfrakcji.put(1, interfacegrakcja1);
-		InterfaceFrakcja interfacegrakcja2 = new Frakcja(2);
-		mapfrakcji.put(2, interfacegrakcja2);
-		InterfaceFrakcja interfacegrakcja3 = new FrakcjaBandyta(3);
-		mapfrakcji.put(3, interfacegrakcja3);*/
 		while(start==false) {
 			TimeUnit.SECONDS.sleep(1);
 		}
@@ -56,6 +41,8 @@ public class Simulation {
 		{
 		TimeUnit.SECONDS.sleep(1);
 		}
+		//
+		System.out.println(inkrementacja);
 		for (int i=0;i<inkrementacja;i++) {
 			System.out.println("TURA: "+i+"!!");
 			for (int z=0;z<frakcje;z++) {
@@ -63,12 +50,11 @@ public class Simulation {
 				while(kontynuuj==false) {
 				TimeUnit.SECONDS.sleep(1);	
 				}
-				turax(z);
+				getfrakcje(z).tura();
 				TimeUnit.SECONDS.sleep(1);
 				if(GUI2.isfull(rozmiar)==true) {
 					break;
 				}
-				GUI2.table.setDefaultRenderer(Object.class,new GradeRenderer());
 			}
 			System.out.println("KONIEC TURY: "+i);
 			if(GUI2.isfull(rozmiar)==true) {
@@ -79,22 +65,87 @@ public class Simulation {
 			System.out.println("Koniec symulacji");
 			tofile(rozmiar,frakcje);
 }
-	//obiera dany obiekt frakcja
+	public static int ilefrakcji() {
+		return ilefrakcji1();
+	}
+	private static int ilefrakcji1() {
+		return Simulation.frakcje;
+	}
+	public static void setilefrakcji(int a) {
+		 setilefrakcji1(a);
+	}
+	private static void setilefrakcji1(int a) {
+		Simulation.frakcje=a;
+	}
+	public static int jakirozmiar() {
+		return jakirozmiar1();
+	}
+	private static int jakirozmiar1() {
+		return Simulation.rozmiar;
+	}
+	public static void setjakirozmiar(int a) {
+		setjakirozmiar1(a);
+	}
+	private static void setjakirozmiar1(int a) {
+		Simulation.rozmiar=a;
+	}
+	public static void setinkrementacje(int a) {
+		setinkrementacje1(a);
+	}
+	private static void setinkrementacje1(int a) {
+		Simulation.inkrementacja=a;
+	}
+	public static void setstart() {
+		setstart01();
+	}
+	private static void setstart01() {
+		start=true;
+	}
+	public static void setstart3() {
+		setstart31();
+	}
+	private static void setstart31() {
+		start3=true;
+	}
+	public static void setstart1() {
+		setstart11();
+	}
+	private static void setstart11() {
+		start1=true;
+	}
+	public static void setcontinuetrue() {
+		setcontinuetrue1();
+	}
+	private static void setcontinuetrue1() {
+		kontynuuj=true;
+	}
+	public static void setcontinuefalse() {
+		setcontinuefalse1();
+	}
+	private static void setcontinuefalse1() {
+		kontynuuj=false;
+	}
 	public static InterfaceFrakcja getfrakcje(int i) {
+		return getfrakcje1(i);
+	}
+	private static InterfaceFrakcja getfrakcje1(int i) {
 		return mapfrakcji.get(i);
 	}
-//wstawia dany obiekt frakcja
-public static void putfrakcje(int i, InterfaceFrakcja trakcja) {
+	public static void putfrakcje(int i, InterfaceFrakcja trakcja) {
+		putfrakcje1(i, trakcja);
+	}
+private static void putfrakcje1(int i, InterfaceFrakcja trakcja) {
 	mapfrakcji.put(i, trakcja);
 }
 public static void getcords(int m) {
+	getcords1(m);
+}
+private static void getcords1(int m) {
 	ArrayList<Integer> xyz=getfrakcje(m).gettvillages(0);
 	System.out.println("Powtorka:Wioska nr "+m+" JEST TU:" + xyz.get(0) + " " + xyz.get(1));
 }
-public static void turax(int m) {
-	getfrakcje(m).tura();
-}
-public static void tofile(int ile, int ilef) {
+
+private static void tofile(int ile, int ilef) {
 	   try {
 		      FileWriter simscore = new FileWriter("symulacja.txt");
 		      for(int i=0;i<ile;i++) {

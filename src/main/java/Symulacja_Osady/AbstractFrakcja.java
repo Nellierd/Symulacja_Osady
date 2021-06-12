@@ -307,46 +307,46 @@ public abstract class AbstractFrakcja {
 		if(canbuildroad==true) {
 			if (nrfr==0) {
 				if (GUI2.whatresources(a, b)==1) {
-					GUI2.table.setValueAt("R11", a, b);
+					GUI2.putvaluetab("R11", a, b);
 				}
 				if (GUI2.whatresources(a, b)==2) {
-					GUI2.table.setValueAt("R12", a, b);
+					GUI2.putvaluetab("R12", a, b);
 				}
 				if (GUI2.whatresources(a, b)==3) {
-					GUI2.table.setValueAt("R13", a, b);
+					GUI2.putvaluetab("R13", a, b);
 				}
 				if (GUI2.whatresources(a, b)==4) {
-					GUI2.table.setValueAt("R14", a, b);
+					GUI2.putvaluetab("R14", a, b);
 				}
 				System.out.println("BUDUJE WIOSKE FRAKCJI 1 W PUNKCIE: "+a+","+b);
 			}
 			if (nrfr==1) {
 				if (GUI2.whatresources(a, b)==1) {
-					GUI2.table.setValueAt("R21", a, b);
+					GUI2.putvaluetab("R21", a, b);
 				}
 				if (GUI2.whatresources(a, b)==2) {
-					GUI2.table.setValueAt("R22", a, b);
+					GUI2.putvaluetab("R22", a, b);
 				}
 				if (GUI2.whatresources(a, b)==3) {
-					GUI2.table.setValueAt("R23", a, b);
+					GUI2.putvaluetab("R23", a, b);
 				}
 				if (GUI2.whatresources(a, b)==4) {
-					GUI2.table.setValueAt("R24", a, b);
+					GUI2.putvaluetab("R24", a, b);
 				}
 				System.out.println("BUDUJE WIOSKE FRAKCJI 2 W PUNKCIE: "+a+","+b);
 			}
 			if (nrfr==2) {
 				if (GUI2.whatresources(a, b)==1) {
-					GUI2.table.setValueAt("R31", a, b);
+					GUI2.putvaluetab("R31", a, b);
 				}
 				if (GUI2.whatresources(a, b)==2) {
-					GUI2.table.setValueAt("R32", a, b);
+					GUI2.putvaluetab("R32", a, b);
 				}
 				if (GUI2.whatresources(a, b)==3) {
-					GUI2.table.setValueAt("R33", a, b);
+					GUI2.putvaluetab("R33", a, b);
 				}
 				if (GUI2.whatresources(a, b)==4) {
-					GUI2.table.setValueAt("R34", a, b);
+					GUI2.putvaluetab("R34", a, b);
 				}
 				System.out.println("BUDUJE WIOSKE FRAKCJI 3 W PUNKCIE: "+a+","+b);
 			}
