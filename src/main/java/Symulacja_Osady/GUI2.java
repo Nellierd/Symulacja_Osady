@@ -20,9 +20,10 @@ public class GUI2 implements ActionListener{
 	private static JTable table2;
 	private JFrame frame1;
 	private JPanel panel1;
-	private JButton button1;
-	private JButton button2;
-	private JButton button3;
+	private static JButton button1;
+	private static JButton button2;
+	private static JButton button3;
+	private static JButton button4;
 	private JLabel frakcja1;
 	private JLabel frakcja2;
 	private JLabel frakcja3;
@@ -91,6 +92,9 @@ public class GUI2 implements ActionListener{
 			button3.setVisible(false);
 			button2.setVisible(true);
 		}
+		if(source == button4) {
+			System.exit(0);
+		}
 	}
 	public static int whatresources(int x,int y) {
 		return whatresources1(x,y);
@@ -125,6 +129,9 @@ public class GUI2 implements ActionListener{
 	}
 	public static void labeling2(int n,int s,int i, int w, int c) {
 		labeling21(n,s,i,w,c);
+	}
+	public static void simfinished() {
+		simfinished1();
 	}
 	/**
 	 * Inicjalizacja komponentów interface'u
@@ -161,11 +168,16 @@ public class GUI2 implements ActionListener{
 		button3 = new JButton("Zatrzymaj");
 		button3.addActionListener(this);
 		button3.setBounds(10,xbounds+60,120,25);
+		button4 = new JButton("Zakoñcz");
+		button4.addActionListener(this);
+		button4.setBounds(10,xbounds+60,120,25);
 		panel1.add(button1);
 		panel1.add(button2);
 		panel1.add(button3);
+		panel1.add(button4);
 		button2.setVisible(false);
 		button3.setVisible(false);
+		button4.setVisible(false);
 		table.setDefaultRenderer(Object.class,new BoardRenderer());
 	}
 	/**
@@ -482,6 +494,11 @@ public class GUI2 implements ActionListener{
 	private static String getvaluetab21(int x, int y) {
 		Object abc =table2.getValueAt(x, y);
 		return abc.toString();
+	}
+	private static void simfinished1() {
+		button2.setVisible(false);
+		button3.setVisible(false);
+		button4.setVisible(true);
 	}
 	/**
 	 * Funkcja umieszczaj¹ca ilosc surowców na tablicy wyników

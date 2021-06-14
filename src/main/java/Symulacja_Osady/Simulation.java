@@ -94,6 +94,7 @@ public class Simulation {
 				break;
 				}
 		}
+		GUI2.simfinished();
 	}
 	/**
 	 * Funkcja sprawdzaj¹ca czy odpowiednie komponenty zosta³y za³adowane.<br>

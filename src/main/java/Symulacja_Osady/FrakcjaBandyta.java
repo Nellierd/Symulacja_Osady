@@ -24,7 +24,6 @@ public class FrakcjaBandyta extends AbstractFrakcja implements InterfaceFrakcja 
 	private void checkvillages1(){
 		int randomNum = ThreadLocalRandom.current().nextInt(0, Simulation.ilefrakcji());
 		if(randomNum!=whatnumber()) {
-			System.out.println(randomNum);
 			int a = (zlodziej/2);
 			this.warehouse.getRes(a, a, a, a);
 			Simulation.getfrakcje(randomNum).minRes(a, a, a, a);
