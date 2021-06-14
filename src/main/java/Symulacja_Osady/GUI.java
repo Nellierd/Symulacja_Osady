@@ -1,7 +1,9 @@
 package Symulacja_Osady;
 
+import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.concurrent.TimeUnit;
 
 import javax.swing.JButton;
 import javax.swing.JEditorPane;
@@ -43,19 +45,30 @@ public class GUI implements ActionListener{
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		Object source = e.getSource();
-		Simulation.setjakirozmiar(Integer.parseInt(rozmiartext.getText()));
-		Simulation.setilefrakcji(Integer.parseInt(frakcjetext.getText()));
-		Simulation.setinkrementacje(Integer.parseInt(inkrementacjatext.getText()));
-		if(source == button)
-		{ 
-			Simulation.defaultvillagescreator();
-			Simulation.setstart1();
-			new GUI2(Simulation.jakirozmiar());
-			frame.setVisible(false);
-		}
-		if(source == button1) {
-			frame.setVisible(false);
-			new GUISettings(Integer.parseInt(frakcjetext.getText()));
+		try {
+			Simulation.setjakirozmiar(Integer.parseInt(rozmiartext.getText()));
+			try {
+				Simulation.setilefrakcji(Integer.parseInt(frakcjetext.getText()));
+				try {
+					Simulation.setinkrementacje(Integer.parseInt(inkrementacjatext.getText()));
+					try {
+						if((Integer.parseInt(rozmiartext.getText())==1&&Integer.parseInt(frakcjetext.getText())==1)||(Integer.parseInt(rozmiartext.getText())>1&&Integer.parseInt(frakcjetext.getText())<5)) {
+						if(source == button)
+						{ 
+							Simulation.defaultvillagescreator();
+							Simulation.setstart1();
+							new GUI2(Simulation.jakirozmiar());
+							frame.setVisible(false);
+						}
+						if(source == button1) {
+							frame.setVisible(false);
+							new GUISettings(Integer.parseInt(frakcjetext.getText()));
+						}
+						}
+					} catch (NumberFormatException f) {}
+				} catch (NumberFormatException f) {}
+			} catch (NumberFormatException f) {}
+		} catch (NumberFormatException f) {
 		}
 	}
 	/**
@@ -91,6 +104,7 @@ public class GUI implements ActionListener{
 		panel.add(rozmiarlabel1);
 		rozmiartext = new JTextField(20);
 		rozmiartext.setBounds(100,270,165,25);
+		rozmiartext.setOpaque(true);
 		panel.add(rozmiartext);
 		/**Panel do wprowadznia frakcji**/
 		frakcjelabel = new JLabel("Frakcje:");
@@ -104,7 +118,7 @@ public class GUI implements ActionListener{
 		/**Panel do wprowadznia surowców**/
 		surowcelabel = new JLabel("Inkrementacja:");
 		surowcelabel.setBounds(10, 330, 100, 25);
-		surowcelabel1 = new JLabel("(Wprowadz wartoœæ x>0)");
+		surowcelabel1 = new JLabel("(Wprowadz wartoœæ x>=0)");
 		surowcelabel1.setBounds(275, 330, 180, 25);
 		panel.add(surowcelabel1);
 		inkrementacjatext = new JTextField(20);
