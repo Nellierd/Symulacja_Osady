@@ -1,6 +1,5 @@
 package Symulacja_Osady;
 
-import java.util.ArrayList;
 import java.util.concurrent.ThreadLocalRandom;
 import java.util.concurrent.TimeUnit;
 

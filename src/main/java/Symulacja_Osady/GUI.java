@@ -1,10 +1,7 @@
 package Symulacja_Osady;
 
-import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.concurrent.TimeUnit;
-
 import javax.swing.JButton;
 import javax.swing.JEditorPane;
 import javax.swing.JFrame;
