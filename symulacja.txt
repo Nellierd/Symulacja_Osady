@@ -1,18 +1,18 @@
-|	Road24	 |	Road21	 |	R21	 |	Road22	 |	R23	 |	Road23	 |	Road22	 |	
+|	Road13	 |	R13	 |	Road11	 |	R13	 |	R21	 |	R24	 |	Road21	 |	
 |	----	 |	----	 |	----	 |	----	 |	----	 |	----	 |	----	 |
-|	Road22	 |	R24	 |	Road24	 |	R21	 |	Road22	 |	R23	 |	Road22	 |	
+|	Road12	 |	Road12	 |	R14	 |	R24	 |	Road24	 |	Road23	 |	R43	 |	
 |	----	 |	----	 |	----	 |	----	 |	----	 |	----	 |	----	 |
-|	R22	 |	Road21	 |	Road21	 |	R22	 |	Road24	 |	R21	 |	Road23	 |	
+|	Road11	 |	R13	 |	Road14	 |	R13	 |	Road21	 |	R21	 |	Road44	 |	
 |	----	 |	----	 |	----	 |	----	 |	----	 |	----	 |	----	 |
-|	Road42	 |	R43	 |	Road21	 |	Road21	 |	R22	 |	Road23	 |	Road21	 |	
+|	R12	 |	Road13	 |	R13	 |	Road21	 |	R22	 |	Road22	 |	R43	 |	
 |	----	 |	----	 |	----	 |	----	 |	----	 |	----	 |	----	 |
-|	R43	 |	Road43	 |	R44	 |	R23	 |	Road21	 |	R11	 |	R13	 |	
+|	Road13	 |	R11	 |	Road11	 |	R23	 |	Road22	 |	R22	 |	Road41	 |	
 |	----	 |	----	 |	----	 |	----	 |	----	 |	----	 |	----	 |
-|	R31	 |	Road42	 |	R44	 |	Road11	 |	R12	 |	Road14	 |	Road11	 |	
+|	Road11	 |	Road14	 |	R13	 |	Road21	 |	R41	 |	Road41	 |	R44	 |	
 |	----	 |	----	 |	----	 |	----	 |	----	 |	----	 |	----	 |
-|	Road31	 |	Road32	 |	R33	 |	R13	 |	Road11	 |	R14	 |	Road14	 |	
+|	Road12	 |	Road11	 |	Road12	 |	R32	 |	Road34	 |	Road33	 |	R32	 |	
 |	----	 |	----	 |	----	 |	----	 |	----	 |	----	 |	----	 |
-Frakcja 1: 10 iloœæ obiektów
-Frakcja 2: 28 iloœæ obiektów
+Frakcja 1: 23 iloœæ obiektów
+Frakcja 2: 15 iloœæ obiektów
 Frakcja 3: 4 iloœæ obiektów
 Frakcja 4: 7 iloœæ obiektów

@@ -11,15 +11,29 @@ import java.util.concurrent.ThreadLocalRandom;
  */
 
 public abstract class AbstractFrakcja {
-	
+	/**
+	 * Magazyn frakcji
+	 */
 	public Warehouse warehouse;
+	/**
+	 * Lista osad nale¿¹ca do frakcji
+	 */
 	private Map<Integer, ArrayList<Integer>> villages;
+	/**
+	 * lista dróg nalezaca do frakcji
+	 */
 	private Map<Integer, ArrayList<Integer>> roads;
 	/**
 	 * Numer przypisany do frakcji
 	 */
 	private int nrfr;
+	/**
+	 * Zmienna sprawdzaj¹ca czy budowanie wiosek zosta³o zakoñczone
+	 */
 	public Boolean building=true;
+	/**
+	 * Zmienna sprawdzaj¹ca czy budowanie drog zostalo zakonczone
+	 */
 	public Boolean building2=true;
 	public AbstractFrakcja(int i) {
 		this.nrfr=i;
@@ -27,53 +41,115 @@ public abstract class AbstractFrakcja {
 		this.villages = new TreeMap<>();
 		this.roads = new TreeMap<>();
 	}
+	/**
+	 * Wywo³annie prywatnej metody putvillages1
+	 * @param i - Kolumna
+	 * @param j - Wiersz
+	 */
 	public void putvillages(int i,int j) {
 		putvillages1(i,j);
 	}
+	/**
+	 * Wywo³anie prywatnej metody whatnumber1
+	 * @return numer jaki posiada frakcja
+	 */
 	public int whatnumber() {
 		return whatnumber1();
 	}
+	/**
+	 * Wywo³anie prywatnej metody putroads1
+	 * @param i - Kolumna
+	 * @param j - Wiersz
+	 */
 	public void putroads(int i,int j) {
 		putroads1(i,j);
 	}
+	/**
+	 * Wywo³anie prywantej metody gettvillages1
+	 * @param i - numer osady
+	 * @return - wektor po³o¿enia wioski na mapie
+	 */
 	public ArrayList<Integer> gettvillages(int i){
 		return gettvillages1(i);
 	}
+	/**
+	 * Wywo³anie prywantej metody getroads1
+	 * @param i - numer drogi
+	 * @return - wektor po³o¿enia drogi na mapie
+	 */
 	public ArrayList<Integer> getroads(int i){
 		return getroads1(i);
 	}
+	/**
+	 * Wywo³anie prywantnej metody buildroad1
+	 * @param abc Wektor polo¿enia nowej drogi
+	 */
 	public void buildroad(Map<Integer, ArrayList<Integer>> abc) {
 		buildroad1(abc);
 	}
+	/**
+	 * Wywo³anie prywatnej metody build buildvillages1
+	 */
 	public void buildvillage() {
 		buildvillage1();
+	}
+	/**
+	 * Wywo³anie prywatnej metody ilevillages1
+	 * @return - iloœæ posiadanych wiosek
+	 */
+	public int ilevillages() {
+		return ilevillages1();
+	}
+	/**
+	 * Wywo³anie prywatnej metody ileroads1
+	 * @return - iloœæ posiadanych drog
+	 */
+	public int ileroads() {
+		return ileroads1();
+	}
+	/**
+	 * Wywo³anie prywatnej metody doiwant1
+	 * @param a - jak surowiec
+	 * @param b - za jaki surowiec
+	 * @return - czy chce siê wymieniæ
+	 */
+	public Boolean doiwant(String a, String b) {
+		return doiwant1(a,b);
+	}
+	/**
+	 * Wywo³anie prywatnej metody minRed1
+	 * @param a - ile kamienia
+	 * @param b - ile zelaza
+	 * @param c - ile drewna
+	 * @param d - ile gliny
+	 */
+	public void minRes(int a,int b,int c,int d) {
+		minRes1(a,b,c,d);
 	}
 	public void checkvillages() {
 		checkvillages1();
 	}
-	public int ilevillages() {
-		return ilevillages1();
+	/**
+	 * Wywo³anie prywatnej metody getRed1
+	 * @param a - ile kamienia
+	 * @param b - ile zelaza
+	 * @param c - ile drewna
+	 * @param d - ile gliny
+	 */
+	public void getRes(int a,int b,int c,int d) {
+		getRes1(a,b,c,d);
+	}
+	/**
+	 * Wywo³anie prywatnej metody tura1
+	 */
+	public void tura() {
+		tura1();
 	}
 	private int ilevillages1() {
 		return villages.size();
 	}
-	public int ileroads() {
-		return ileroads1();
-	}
 	private int ileroads1() {
 		return roads.size();
-	}
-	public Boolean doiwant(String a, String b) {
-		return doiwant1(a,b);
-	}
-	public void minRes(int a,int b,int c,int d) {
-		minRes1(a,b,c,d);
-	}
-	public void getRes(int a,int b,int c,int d) {
-		getRes1(a,b,c,d);
-	}
-	public void tura() {
-		tura1();
 	}
 	/**
 	 * Funkcja s³u¿¹ca do umieszczania danej wioski na liœcie
