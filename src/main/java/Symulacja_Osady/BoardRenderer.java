@@ -42,7 +42,7 @@ public class BoardRenderer extends JLabel implements TableCellRenderer
             super.setBackground(new Color(153,204,255));
         }
         else if(a == "3") {					//drewno
-        	super.setText("");
+        	super.setText("");  
             super.setBackground(new Color(204,255,153));
         }
         else if(a == "4") {					//glina

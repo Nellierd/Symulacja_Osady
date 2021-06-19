@@ -151,7 +151,7 @@ public class Simulation {
 	}
 	/**
 	 * Funkcja wstawiaj¹ca do zmiennej iloœæ inkrementacji w symulacji
-	 * @param a
+	 * @param a - iloœæ inkrementacji
 	 */
 	private static void setinkrementacje1(int a) {
 		Simulation.inkrementacja=a;

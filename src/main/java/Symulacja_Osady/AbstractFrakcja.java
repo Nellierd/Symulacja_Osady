@@ -9,11 +9,15 @@ import java.util.concurrent.ThreadLocalRandom;
  * @author Nenaki
  *
  */
-public abstract class AbstractFrakcja {
 
+public abstract class AbstractFrakcja {
+	
 	public Warehouse warehouse;
 	private Map<Integer, ArrayList<Integer>> villages;
 	private Map<Integer, ArrayList<Integer>> roads;
+	/**
+	 * Numer przypisany do frakcji
+	 */
 	private int nrfr;
 	public Boolean building=true;
 	public Boolean building2=true;
@@ -417,7 +421,7 @@ public abstract class AbstractFrakcja {
 		
 	}
 	/**
-	 * Funkcja pobieraj¹ca surowce z planszy<p>
+	 * Funkcja pobieraj¹ca surowce z planszy
 	 * 
 	 */
 	private void checkvillages1(){
@@ -484,15 +488,11 @@ public abstract class AbstractFrakcja {
 		GUI2.labeling2(nrfr, stone, irone, wood, clay);
 	}
 	/**
-	 * Funkcja sprawdzaj¹ca czy wioska chce dany surowiec
-	 * @param what - surowiec jaki chce oddaæ inna wioska
-	 * @param forwhat - surowiec jaki chce w zamian
+	 * Funkcja sprawdzaj¹ca czy frakcja chce dany surowiec
+	 * @param a - surowiec jaki chce oddaæ inna wioska
+	 * @param b - surowiec jaki chce w zamian
 	 * @return <strong>true</strong> - jeœli chce siê wymieniæ <BR>
 	 * <strong>false</strong> - jeœli nie chce siê wymieniæ
-	 */
-	
-	/**
-	 * Funkcja s³u¿¹ca do implementacji tury Frakcji
 	 */
 	private Boolean doiwant1(String a, String b) {
 		return warehouse.doiwant(a, b);
@@ -509,6 +509,9 @@ public abstract class AbstractFrakcja {
 	private void wymiana1(int a) {
 		warehouse.wymiana(a);
 	}
+	/**
+	 * Funkcja s³u¿¹ca do implementacji tury Frakcji
+	 */
 	private void tura1() {
 		checkvillages();//Dodanie zasobów na poczatku tury
 		GUI2.labeling(nrfr, warehouse.ilestones(), warehouse.ileiron(), warehouse.ilewood(), warehouse.ileclay());

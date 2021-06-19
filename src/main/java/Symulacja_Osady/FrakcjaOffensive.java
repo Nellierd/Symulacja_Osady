@@ -13,13 +13,13 @@ public class FrakcjaOffensive extends AbstractFrakcja implements InterfaceFrakcj
 	 */
 	@Override
 	public Boolean doiwant(String a, String b) {
-		return doiwant1(a, b);
+		return doiwant1();
 	}
 	/**
 	 * Funkcja niezale¿na od parametrów, obiekt ten ma zawsze odrzucaæ wymiane
 	 * @return <strong>false</strong>
 	 */
-	private Boolean doiwant1(String a, String b) {
+	private Boolean doiwant1() {
 		return false;
 	}
 }
